@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API
+namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
@@ -91,6 +91,13 @@ namespace API
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
+            
+            if(CheckEmailExist(registerDto.Email).Result.Value)
+            {
+                return new BadRequestObjectResult(new ApiValidationErrorResponse{
+                    Errors=new []{"This email is already taken."}
+                });
+            }
             var user = new AppUser
             {
                 DisplayName = registerDto.DisplayName,
