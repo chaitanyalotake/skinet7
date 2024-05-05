@@ -7,7 +7,7 @@ namespace Core.Entities.OrderAggregate
         }
 
         public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, Address shipToAddress,
-        DeliveryMethod deliveryMethod, decimal subtotal)
+        DeliveryMethod deliveryMethod, decimal subtotal, string paymentIntentId)
         {
             BuyerEmail = buyerEmail;
             //OrderDate = orderDate;
@@ -15,6 +15,7 @@ namespace Core.Entities.OrderAggregate
             DeliveryMethod = deliveryMethod;
             OrderItems = orderItems;
             Subtotal = subtotal;
+            PaymentIntentId = paymentIntentId;
             //Status = status;            
         }
 
